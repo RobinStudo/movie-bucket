@@ -4,6 +4,12 @@ class MainController
 {
     public function home(): void
     {
-        echo 'Hello World!';
+        echo 'Accueil';
+    }
+
+    public function about(): void
+    {
+        echo 'A propos';
     }
 }
+

@@ -4,7 +4,15 @@ class Kernel
 {
     public function run(): void
     {
-        $controller = new MainController();
-        $controller->home();
+        $path = $_SERVER['PATH_INFO'] ?? '/';
+
+        $router = new Router();
+        $controllerName = $router->match($path);
+        $controllerFragments = explode('::', $controllerName);
+        $controllerClass = $controllerFragments[0];
+        $controllerMethod = $controllerFragments[1];
+
+        $controller = new $controllerClass();
+        $controller->$controllerMethod();
     }
 }
