@@ -1,5 +1,7 @@
 <?php
 
+namespace App\Controller;
+
 class MovieController
 {
     public function list(): void

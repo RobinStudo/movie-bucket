@@ -1,5 +1,9 @@
 <?php
 
+namespace App\Core;
+
+use App\Core\Service\Router;
+
 class Kernel
 {
     public function run(): void

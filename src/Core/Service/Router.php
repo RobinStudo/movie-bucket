@@ -1,23 +1,25 @@
 <?php
 
+namespace App\Core\Service;
+
 class Router
 {
     private array $routes = [
         [
             'path' => '/',
-            'controller' => 'MainController::home',
+            'controller' => 'App\Controller\MainController::home',
         ],
         [
             'path' => '/about',
-            'controller' => 'MainController::about',
+            'controller' => 'App\Controller\MainController::about',
         ],
         [
             'path' => '/movies',
-            'controller' => 'MovieController::list',
+            'controller' => 'App\Controller\MovieController::list',
         ],
         [
             'path' => '/movie',
-            'controller' => 'MovieController::show',
+            'controller' => 'App\Controller\MovieController::show',
         ],
     ];
 
