@@ -15,7 +15,7 @@ class ViewManager
         $this->config = $configurationProvider->load(self::CONFIG_FILE);
     }
 
-    public function render(string $viewPath): void
+    public function render(string $viewPath, array $data = []): void
     {
         $path = $this->buildPath($this->config['layout_template']);
         $contentPath = $this->buildPath($viewPath);

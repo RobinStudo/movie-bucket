@@ -8,7 +8,16 @@ class MovieController extends AbstractController
 {
     public function list(): void
     {
-        $this->viewManager->render('movie/list');
+        $movies = [
+            'Gladiator',
+            'Die Hard',
+            'La vague',
+            'The Rock',
+        ];
+
+        $this->viewManager->render('movie/list', [
+            'movies' => $movies,
+        ]);
     }
 
     public function show(): void
