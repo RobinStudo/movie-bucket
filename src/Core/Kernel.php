@@ -22,7 +22,7 @@ class Kernel
     {
         $path = $_SERVER['PATH_INFO'] ?? '/';
 
-        $router = new Router();
+        $router = $this->container->get(Router::class);
         $route = $router->match($path);
         $controllerFragments = explode('::', $route->getController());
         $controllerClass = $controllerFragments[0];

@@ -9,7 +9,7 @@ class Router
     private const CONFIG_FILE = 'routes';
     private array $routes;
 
-    public function __construct()
+    public function __construct(private ConfigurationProvider $configurationProvider)
     {
         $this->loadRoutes();
     }
@@ -27,8 +27,7 @@ class Router
 
     private function loadRoutes(): void
     {
-        $configProvider = new ConfigurationProvider();
-        $arrayRoutes = $configProvider->load(self::CONFIG_FILE);
+        $arrayRoutes = $this->configurationProvider->load(self::CONFIG_FILE);
 
         foreach ($arrayRoutes as $routeName => $arrayRoute) {
             $this->routes[] = new Route($routeName, $arrayRoute['path'], $arrayRoute['controller']);

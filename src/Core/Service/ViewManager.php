@@ -9,10 +9,9 @@ class ViewManager
     private const CONFIG_FILE = 'view';
     private array $config;
 
-    public function __construct()
+    public function __construct(private ConfigurationProvider $configurationProvider)
     {
-        $configurationProvider = new ConfigurationProvider();
-        $this->config = $configurationProvider->load(self::CONFIG_FILE);
+        $this->config = $this->configurationProvider->load(self::CONFIG_FILE);
     }
 
     public function render(string $viewPath, array $data = []): void
