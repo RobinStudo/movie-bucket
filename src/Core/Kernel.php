@@ -18,8 +18,8 @@ class Kernel
         $path = $_SERVER['PATH_INFO'] ?? '/';
 
         $router = new Router();
-        $controllerName = $router->match($path);
-        $controllerFragments = explode('::', $controllerName);
+        $route = $router->match($path);
+        $controllerFragments = explode('::', $route->getController());
         $controllerClass = $controllerFragments[0];
         $controllerMethod = $controllerFragments[1];
 

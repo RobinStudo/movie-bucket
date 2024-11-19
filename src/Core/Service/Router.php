@@ -2,6 +2,7 @@
 
 namespace App\Core\Service;
 
+use App\Core\Model\Route;
 use Symfony\Component\Yaml\Yaml;
 
 class Router
@@ -14,11 +15,11 @@ class Router
         $this->loadRoutes();
     }
 
-    public function match(string $path): ?string
+    public function match(string $path): ?Route
     {
         foreach ($this->routes as $route) {
-            if ($path === $route['path']) {
-                return $route['controller'];
+            if ($path === $route->getPath()) {
+                return $route;
             }
         }
 
@@ -27,6 +28,10 @@ class Router
 
     private function loadRoutes(): void
     {
-        $this->routes = Yaml::parseFile(self::CONFIG_FILE);
+        $arrayRoutes = Yaml::parseFile(self::CONFIG_FILE);
+
+        foreach ($arrayRoutes as $routeName => $arrayRoute) {
+            $this->routes[] = new Route($routeName, $arrayRoute['path'], $arrayRoute['controller']);
+        }
     }
 }
