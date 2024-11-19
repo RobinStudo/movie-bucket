@@ -2,11 +2,14 @@
 
 namespace App\Controller;
 
+use App\Core\Service\ViewManager;
+
 class MainController
 {
     public function home(): void
     {
-        echo 'Accueil';
+        $viewManager = new ViewManager();
+        $viewManager->render('main/home');
     }
 
     public function about(): void
