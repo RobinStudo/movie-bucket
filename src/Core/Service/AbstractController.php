@@ -4,10 +4,7 @@ namespace App\Core\Service;
 
 abstract class AbstractController
 {
-    protected ViewManager $viewManager;
-
-    public function __construct()
+    public function __construct(protected ViewManager $viewManager)
     {
-        $this->viewManager = new ViewManager();
     }
 }
