@@ -2,6 +2,8 @@
 
 namespace App\Core\Service;
 
+use Symfony\Component\Yaml\Yaml;
+
 class Router
 {
     private const CONFIG_FILE = '../config/routes.yaml';
@@ -25,6 +27,6 @@ class Router
 
     private function loadRoutes(): void
     {
-        $this->routes = yaml_parse_file(self::CONFIG_FILE);
+        $this->routes = Yaml::parseFile(self::CONFIG_FILE);
     }
 }

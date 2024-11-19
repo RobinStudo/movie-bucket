@@ -1,0 +1,13 @@
+{
+    "name": "robin/movie-bucket",
+    "type": "project",
+    "authors": [
+        {
+            "name": "Robin Delbaere",
+            "email": "hello@rdelbaere.fr"
+        }
+    ],
+    "require": {
+        "symfony/yaml": "^7.1"
+    }
+}
