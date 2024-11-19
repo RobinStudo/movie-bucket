@@ -20,10 +20,10 @@ class Kernel
 
     public function run(): void
     {
-        $path = $_SERVER['PATH_INFO'] ?? '/';
-
         $router = $this->container->get(Router::class);
+        $path = $_SERVER['PATH_INFO'] ?? '/';
         $route = $router->match($path);
+
         $controllerFragments = explode('::', $route->getController());
         $controllerClass = $controllerFragments[0];
         $controllerMethod = $controllerFragments[1];

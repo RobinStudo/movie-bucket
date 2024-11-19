@@ -1,0 +1,35 @@
+services:
+    db:
+        image: mariadb:10.11
+        environment:
+            MARIADB_ROOT_PASSWORD: root
+            MARIADB_DATABASE: movie-bucket
+            MARIADB_USER: movie-bucket
+            MARIADB_PASSWORD: movie-bucket
+
+    php:
+        build:
+            context: ./docker/php
+            dockerfile: Dockerfile
+        volumes:
+            - ./:/var/www/app
+            - ./vendor:/var/www/app/vendor:delegated
+        depends_on:
+            - db
+
+    nginx:
+        build:
+            context: ./docker/nginx
+            dockerfile: Dockerfile
+        volumes:
+            - ./public:/var/www/app/public
+        depends_on:
+            - php
+        ports:
+            - "80:80"
+
+    phpmyadmin:
+        image: phpmyadmin:latest
+        ports:
+            - "8080:80"
+
