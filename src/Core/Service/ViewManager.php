@@ -17,12 +17,18 @@ class ViewManager
 
     public function render(string $viewPath): void
     {
-        $path = sprintf('%s/%s.php', $this->config['directory'], $viewPath);
+        $path = $this->buildPath($this->config['layout_template']);
+        $contentPath = $this->buildPath($viewPath);
 
-        if (!file_exists($path)) {
+        if (!file_exists($contentPath)) {
             throw new LogicException(sprintf('View "%s" does not exist', $viewPath));
         }
 
         require $path;
+    }
+
+    private function buildPath(string $viewPath): string
+    {
+        return sprintf('%s/%s.php', $this->config['directory'], $viewPath);
     }
 }
