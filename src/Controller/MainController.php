@@ -2,14 +2,13 @@
 
 namespace App\Controller;
 
-use App\Core\Service\ViewManager;
+use App\Core\Service\AbstractController;
 
-class MainController
+class MainController extends AbstractController
 {
     public function home(): void
     {
-        $viewManager = new ViewManager();
-        $viewManager->render('main/home');
+        $this->viewManager->render('main/home');
     }
 
     public function about(): void

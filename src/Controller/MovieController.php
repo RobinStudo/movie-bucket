@@ -2,7 +2,9 @@
 
 namespace App\Controller;
 
-class MovieController
+use App\Core\Service\AbstractController;
+
+class MovieController extends AbstractController
 {
     public function list(): void
     {
