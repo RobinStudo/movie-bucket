@@ -3,11 +3,10 @@
 namespace App\Core\Service;
 
 use App\Core\Model\Route;
-use Symfony\Component\Yaml\Yaml;
 
 class Router
 {
-    private const CONFIG_FILE = '../config/routes.yaml';
+    private const CONFIG_FILE = 'routes';
     private array $routes;
 
     public function __construct()
@@ -28,7 +27,8 @@ class Router
 
     private function loadRoutes(): void
     {
-        $arrayRoutes = Yaml::parseFile(self::CONFIG_FILE);
+        $configProvider = new ConfigurationProvider();
+        $arrayRoutes = $configProvider->load(self::CONFIG_FILE);
 
         foreach ($arrayRoutes as $routeName => $arrayRoute) {
             $this->routes[] = new Route($routeName, $arrayRoute['path'], $arrayRoute['controller']);
