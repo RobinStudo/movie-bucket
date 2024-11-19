@@ -13,7 +13,7 @@ class MainController extends AbstractController
 
     public function about(): void
     {
-        echo 'A propos';
+        $this->viewManager->render('main/about');
     }
 }
 

@@ -8,12 +8,12 @@ class MovieController extends AbstractController
 {
     public function list(): void
     {
-        echo 'Liste de films';
+        $this->viewManager->render('movie/list');
     }
 
     public function show(): void
     {
-        echo 'Vue film';
+        $this->viewManager->render('movie/show');
     }
 }
 
