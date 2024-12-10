@@ -19,5 +19,13 @@ abstract class AbstractRepository
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    public function findById(int $id): ?array
+    {
+        $query = 'SELECT * FROM ' . $this->getTableName() . ' WHERE id = :id';
+        $stmt = $this->connection->prepare($query);
+        $stmt->execute(['id' => $id]);
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+
     abstract protected function getTableName(): string;
 }

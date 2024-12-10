@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Core\Service\AbstractController;
 use App\Core\Service\ViewManager;
 use App\Repository\MovieRepository;
+use Exception;
 
 class MovieController extends AbstractController
 {
@@ -25,7 +26,16 @@ class MovieController extends AbstractController
 
     public function show(): void
     {
-        $this->viewManager->render('movie/show');
+        $id = $_GET['id'] ?? null;
+        if (!$id) {
+            throw new Exception('Unable to retrieve movie');
+        }
+
+        $movie = $this->movieRepository->findById((int) $id);
+
+        $this->viewManager->render('movie/show', [
+            'movie' => $movie,
+        ]);
     }
 }
 
