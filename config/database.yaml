@@ -1,0 +1,4 @@
+host: db
+user: movie-bucket
+password: movie-bucket
+database: movie-bucket
