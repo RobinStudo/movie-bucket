@@ -1,6 +1,15 @@
 <h1>Créer un film</h1>
 
 <form method="post">
+    <?php if (!empty($data['errors'])) { ?>
+        <ul>
+            <?php foreach ($data['errors'] as $error) { ?>
+                <li><?php echo $error; ?></li>
+            <?php } ?>
+        </ul>
+    <?php } ?>
+
+
     <div>
         <label>
             Titre du film
