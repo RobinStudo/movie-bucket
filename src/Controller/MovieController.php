@@ -14,8 +14,6 @@ class MovieController extends AbstractController
         $stmt = $db->query('SELECT * FROM movie');
         $movies = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-        dump($movies);
-
         $this->viewManager->render('movie/list', [
             'movies' => $movies,
         ]);
