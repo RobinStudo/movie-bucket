@@ -37,5 +37,13 @@ class MovieController extends AbstractController
             'movie' => $movie,
         ]);
     }
+
+    /*
+        TODO - Créer une route
+        TODO - Créer le controller associé
+        TODO - Lui faire afficher un formualire de création de film
+        TODO - Dans le même controller, quand la méthode est POST : on récupère les data depuis $_POST
+        TODO - Puis on insert en BDD depuis une méthode de l'AbstractRepo
+    */
 }
 
