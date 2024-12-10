@@ -27,5 +27,17 @@ abstract class AbstractRepository
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
+    public function insert(array $data): int
+    {
+        $keys = array_keys($data);
+        $placeholders = array_fill(0, count($keys), '?');
+        $query = sprintf('INSERT INTO %s (%s) VALUES (%s)', $this->getTableName(), implode(',', $keys), implode(',', $placeholders));
+
+        $stmt = $this->connection->prepare($query);
+        $stmt->execute(array_values($data));
+
+        return $this->connection->lastInsertId();
+    }
+
     abstract protected function getTableName(): string;
 }

@@ -13,3 +13,7 @@ movie_list:
 movie_show:
     path: /movie
     controller: App\Controller\MovieController::show
+
+movie_new:
+    path: /movie/new
+    controller: App\Controller\MovieController::new

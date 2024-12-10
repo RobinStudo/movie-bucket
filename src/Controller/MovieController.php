@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Core\Service\AbstractController;
+use App\Core\Service\Router;
 use App\Core\Service\ViewManager;
 use App\Repository\MovieRepository;
 use Exception;
@@ -10,6 +11,7 @@ use Exception;
 class MovieController extends AbstractController
 {
     public function __construct(
+        protected Router $router,
         protected ViewManager $viewManager,
         private MovieRepository $movieRepository,
     ) {
@@ -38,10 +40,24 @@ class MovieController extends AbstractController
         ]);
     }
 
+    public function new(): void
+    {
+        if ('POST' === $_SERVER['REQUEST_METHOD']) {
+            $data = [
+                'title' => htmlspecialchars($_POST['title'] ?? ''),
+                'description' => htmlspecialchars($_POST['description'] ?? ''),
+                'released_at' => htmlspecialchars($_POST['released_at'] ?? ''),
+            ];
+
+            $movieId = $this->movieRepository->insert($data);
+
+            header(sprintf('Location: %s?id=%s', $this->router->generateUrl('movie_show'), $movieId));
+        }
+
+        $this->viewManager->render('movie/new');
+    }
+
     /*
-        TODO - Créer une route
-        TODO - Créer le controller associé
-        TODO - Lui faire afficher un formualire de création de film
         TODO - Dans le même controller, quand la méthode est POST : on récupère les data depuis $_POST
         TODO - Puis on insert en BDD depuis une méthode de l'AbstractRepo
     */

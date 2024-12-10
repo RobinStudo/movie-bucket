@@ -3,6 +3,7 @@
 namespace App\Core\Service;
 
 use App\Core\Model\Route;
+use App\Core\Util\UrlHelper;
 
 class Router
 {
@@ -25,12 +26,19 @@ class Router
         return null;
     }
 
+    public function generateUrl(string $routeName): string
+    {
+        $route = $this->routes[$routeName];
+
+        return sprintf('%sindex.php%s', UrlHelper::getBasePath(), $route->getPath());
+    }
+
     private function loadRoutes(): void
     {
         $arrayRoutes = $this->configurationProvider->load(self::CONFIG_FILE);
 
         foreach ($arrayRoutes as $routeName => $arrayRoute) {
-            $this->routes[] = new Route($routeName, $arrayRoute['path'], $arrayRoute['controller']);
+            $this->routes[$routeName] = new Route($routeName, $arrayRoute['path'], $arrayRoute['controller']);
         }
     }
 }
