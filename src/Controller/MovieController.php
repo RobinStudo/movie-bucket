@@ -3,16 +3,20 @@
 namespace App\Controller;
 
 use App\Core\Service\AbstractController;
-use PDO;
+use App\Core\Service\ViewManager;
+use App\Repository\MovieRepository;
 
 class MovieController extends AbstractController
 {
+    public function __construct(
+        protected ViewManager $viewManager,
+        private MovieRepository $movieRepository,
+    ) {
+    }
+
     public function list(): void
     {
-        $db = new PDO('mysql:host=db;dbname=movie-bucket', 'movie-bucket', 'movie-bucket');
-
-        $stmt = $db->query('SELECT * FROM movie');
-        $movies = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $movies = $this->movieRepository->findAll();
 
         $this->viewManager->render('movie/list', [
             'movies' => $movies,
