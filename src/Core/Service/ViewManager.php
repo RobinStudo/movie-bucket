@@ -2,6 +2,7 @@
 
 namespace App\Core\Service;
 
+use App\Core\Util\UrlHelper;
 use LogicException;
 
 class ViewManager
@@ -24,6 +25,11 @@ class ViewManager
         }
 
         require $path;
+    }
+
+    private function asset(string $path): string
+    {
+        return UrlHelper::getBasePath() . $path;
     }
 
     private function buildPath(string $viewPath): string
